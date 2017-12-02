@@ -1,3 +1,7 @@
+{% load static %}
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,6 +13,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel='stylesheet' href="{% static 'css/main.cs'%}">
 </head>
 <body>
 <div class='text-center'>
@@ -18,8 +23,17 @@
     <div class="row">
         <div class="col">
             <p>{{ content }}</p>
+            <img src="{% static 'img/city.jpg' %}" class="img-fluid">
+
         </div>
     </div>
+    {% if premium_content %}
+     <div class="row">
+        <div class="col">
+            <p>{{ premium_content }}</p>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 <!-- Optional JavaScript -->
