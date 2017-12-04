@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^register/$', register_page),
     url(r'^contact/$', contact_page),
     url(r'^about/$', about_page),
-    url(r'^products/',include('products.urls')),
+    url(r'^products/',include('products.urls', namespace='products')),
 ]
 
 if settings.DEBUG:

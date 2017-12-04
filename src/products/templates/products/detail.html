@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ object.title}}</title>
-</head>
-<body>
- {{ object.title }}
- {% if object.image %}
-    <img src="{{ object.image.url}}" class="img-fluid" />
-{% endif %}
-</body>
-</html>
+{% extends 'base.html' %}
+
+    {% block content %}
+
+        {{ object.title }}
+        {% if object.image %}
+            <img src="{{ object.image.url}}" class="img-fluid" />
+        {% endif %}
+
+{% endblock %}
