@@ -21,16 +21,18 @@ class ProductDetailView(DetailView):
         context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
         return context
 
-    # def get_object(self,*args,**kwargs):
-    #     request = self.request
-    #     pk = self.kwargs.get('pk')
-    #     instance = Product.objects.get_by_id(pk)
-    #     if instance is None:
-    #         raise Http404("Product doesn't exist")
-    #     return instance
-
     def get_queryset(self, *args, **kwargs):
         request = self.request
         pk = self.kwargs.get('pk')
         return Product.objects.filter(pk=pk)
 
+class ProductFeaturedListView(ListView):
+    template_name = 'products/list.html'
+
+    def get_queryset(self, *args, **kwargs):
+        request = self.request
+        return Product.objects.all().featured()
+
+class ProductFeaturedDetailView(DetailView):
+    template_name = 'products/featured-detail.html'
+    queryset = Product.objects.featured()
