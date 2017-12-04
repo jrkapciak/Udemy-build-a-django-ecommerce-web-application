@@ -1,6 +1,8 @@
 from django.db import models
 import random
 import os
+from django.db.models.signals import pre_save
+from .utils import unique_slug_generator
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -48,9 +50,16 @@ class Product(models.Model):
         upload_to=upload_image_path, null=True, blank=True)
     featured = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
+    slug = models.SlugField(blank=True,unique=True)
 
 
     objects = ProductManager()
 
     def __str__(self):
         return self.title
+
+def product_pre_save_reciver(sender, instance, *args,**kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+pre_save.connect(product_pre_save_reciver, sender=Product)

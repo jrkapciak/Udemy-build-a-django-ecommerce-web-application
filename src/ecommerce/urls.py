@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^register/$', register_page),
     url(r'^contact/$', contact_page),
     url(r'^about/$', about_page),
-    url(r'products/(?P<pk>\d+)/$', ProductDetailView.as_view()),
+    url(r'products/(?P<slug>[\w-]+)/$', ProductDetailView.as_view()),
     url(r'^products/$', ProductListView.as_view()),
     url(r'^featured/$', ProductFeaturedListView.as_view()),
     url(r'^featured/(?P<pk>\d+)/$$', ProductFeaturedDetailView.as_view()),
