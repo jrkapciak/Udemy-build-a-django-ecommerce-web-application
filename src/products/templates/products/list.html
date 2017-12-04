@@ -6,7 +6,7 @@
 </head>
 <body>
 {% for obj in object_list %}
-<p>{{ obj.title }} </p>
+<p><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></p>
 {% endfor %}
 </body>
 </html>

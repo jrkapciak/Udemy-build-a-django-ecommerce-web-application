@@ -15,15 +15,9 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import url
+from django.conf.urls import url,include
 from django.contrib import admin
 
-from products.views import (
-    ProductListView,
-    ProductDetailView,
-    ProductFeaturedListView,
-    ProductFeaturedDetailView,
-)
 from .views import home_page,contact_page,about_page,login_page,register_page
 
 urlpatterns = [
@@ -33,11 +27,7 @@ urlpatterns = [
     url(r'^register/$', register_page),
     url(r'^contact/$', contact_page),
     url(r'^about/$', about_page),
-    url(r'products/(?P<slug>[\w-]+)/$', ProductDetailView.as_view()),
-    url(r'^products/$', ProductListView.as_view()),
-    url(r'^featured/$', ProductFeaturedListView.as_view()),
-    url(r'^featured/(?P<pk>\d+)/$$', ProductFeaturedDetailView.as_view()),
-
+    url(r'^products/',include('products.urls')),
 ]
 
 if settings.DEBUG:
