@@ -22,11 +22,12 @@ from .views import home_page,contact_page,about_page,login_page,register_page
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', home_page),
-    url(r'^login/$', login_page),
-    url(r'^register/$', register_page),
-    url(r'^contact/$', contact_page),
-    url(r'^about/$', about_page),
+    url(r'^$', home_page, name='home'),
+    url(r'^login/$', login_page,name='login'),
+    url(r'^logout/$', login_page, name='logout'),
+    url(r'^register/$', register_page ,name='register'),
+    url(r'^contact/$', contact_page ,name='contact'),
+    url(r'^about/$', about_page, name='about'),
     url(r'^products/',include('products.urls', namespace='products')),
 ]
 

@@ -5,8 +5,9 @@
     </a>
     {% endif %}
   <div class="card-block">
-    <h4 class="card-title">{{ instance.title }}</h4>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h3 class="card-title">{{ instance.title }}</h3>
+    <p class="card-text">{{ instance.timestamp|timesince }}</p>
+    <p class="card-text">{{ instance.description|truncatewords:12 }}</p>
     <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">View</a>
   </div>
 </div>

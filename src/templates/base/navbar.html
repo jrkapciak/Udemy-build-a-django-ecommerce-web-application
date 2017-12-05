@@ -1,1 +1,45 @@
-<h1>{{ brand_name}}</h1>
+{% url 'home' as home_url %}
+{% url 'contact' as contact_url %}
+{% url 'products:list' as products_list_url %}
+{% url 'login' as login_url %}
+{% url 'login' as logout_url %}
+{% url 'register' as register_url %}
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="{% url 'home' %}">eCommerce</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item {% if request.path == home_url %}active{%endif%}">
+        <a class="nav-link" href="{{ home_url }}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item {% if request.path == contact_url %}active{%endif%}">
+        <a class="nav-link" href="{{ contact_url }}">Contact</a>
+      </li>
+      <li class="nav-item {% if request.path == products_list_url %}active{%endif%}">
+        <a class="nav-link" href="{{ products_list_url }}">Products</a>
+          {% if request.user.is_authenticated %}
+      </li>
+        <li class="nav-item {% if request.path == logout_url %}active{%endif%}">
+        <a class="nav-link" href="{{ logout_url }}">logout</a>
+      </li>
+        {% else %}
+        <li class="nav-item {% if request.path == login_url %}active{%endif%}">
+        <a class="nav-link" href="{{ login_url }}">login</a>
+        </li>
+        <li class="nav-item {% if request.path == register_url %}active{%endif%}">
+        <a class="nav-link" href="{{ register_url }}">register</a>
+      </li>
+        {% endif %}
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
