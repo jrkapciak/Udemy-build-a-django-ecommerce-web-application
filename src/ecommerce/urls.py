@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^contact/$', contact_page ,name='contact'),
     url(r'^about/$', about_page, name='about'),
     url(r'^products/',include('products.urls', namespace='products')),
+    url(r'^search/', include('search.urls', namespace='search')),
+
 ]
 
 if settings.DEBUG:

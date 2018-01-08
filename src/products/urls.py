@@ -2,9 +2,7 @@ from django.conf.urls import url
 
 from .views import (
     ProductListView,
-    ProductDetailView,
-
-)
+    ProductDetailView,)
 
 urlpatterns = [
     url(r'(?P<slug>[\w-]+)/$', ProductDetailView.as_view(),name='detail'),
