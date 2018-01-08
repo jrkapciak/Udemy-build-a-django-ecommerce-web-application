@@ -5,11 +5,7 @@ from django.db.models.signals import pre_save
 from .utils import unique_slug_generator
 from django.urls import reverse
 from django.db.models import Q
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 91537c5eaa003beff4a98cefe8318e7918c86fa4
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -36,10 +32,6 @@ class ProductQuerySet(models.query.QuerySet):
                    Q(tag__title__icontains=query))
         return self.filter(lookups).distinct()
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 91537c5eaa003beff4a98cefe8318e7918c86fa4
 class ProductManager(models.Manager):
 
     def all(self):
