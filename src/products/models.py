@@ -15,7 +15,7 @@ def get_filename_ext(filepath):
 def upload_image_path(instance,filename):
     new_file_name = random.randint(1,3422132133)
     name,ext = get_filename_ext(filename)
-    final_name ='{}.{}'.format(new_file_name,ext)
+    final_name ='{}{}'.format(new_file_name,ext)
     return 'products/{}/{}'.format(new_file_name,final_name)
 
 class ProductQuerySet(models.query.QuerySet):

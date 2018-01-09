@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'products',
     'search',
     'tags',
-    'carts']
+    'carts',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

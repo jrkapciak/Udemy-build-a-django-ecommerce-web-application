@@ -1,5 +1,7 @@
 from django.shortcuts import render, Http404,get_object_or_404
 from django.views.generic import ListView,DetailView
+
+from carts.models import Cart
 from .models import Product
 
 class ProductListView(ListView):
@@ -12,6 +14,14 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     queryset = Product.objects.all()
     template_name = 'products/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        cart_obj, new_cart = Cart.objects.new_or_get(self.request)
+        context['cart'] = cart_obj
+        return context
+
+
 
     def get_object(self, *args, **kwargs):
         request = self.request
