@@ -1,33 +1,3 @@
-{% extends 'base.html' %}
-{% block content %}
-        <div class="row">
-
-            {% if query %}
-            <div class="col-12 mb-3">
-                Result for {{ query }}
-                <hr>
-            </div>
-            {% else %}
-
-            <div class="col-12 col-md-8 mx-auto">
-            {% include 'search/snippet.html' %}
-            </div>
-
-            {% endif %}
-
-
-            {% for obj in object_list %}
-            <div class="col-md-3">
-                {% include 'products/snippets/card.html' with instance=obj %}
-
-                {% if forloop.counter|divisibleby:3 %}
-                </div></div><div class="row"><div class="col-12"><hr/></div>
-            {% else %}
-    </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -57,17 +27,17 @@
     {% for obj in object_list %}
         <div class='col'>
 
-        {% include 'products/snippets/card.html' with instance=obj %}
-
+        {% include 'products/snippets/card.html' with instance=obj %}  
+        
         {% if forloop.counter|divisibleby:3 %}
          </div> </div><div class='row'><div class='col-12'><hr/></div>
         {% elif forloop.counter|divisibleby:2 %}
             </div> </div><div class='row'><div class='col-12'><hr/></div>
         {% else %}
-         </div>
+         </div>  
         {% endif %}
-
-
+       
+    
     {% endfor %}
 </div>
 {% endblock %}
