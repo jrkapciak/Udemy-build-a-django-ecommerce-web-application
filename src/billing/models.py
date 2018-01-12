@@ -33,13 +33,11 @@ class BillingProfile(models.Model):
     active = models.BooleanField(default=True)
     update = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    # customer_id in Stripe or Braintree
 
     objects = BillingProfileManager()
 
     def __str__(self):
         return self.email
-
 
 def user_created_receiver(sender, instance, created, *args, **kwargs):
     if created and instance.email:
