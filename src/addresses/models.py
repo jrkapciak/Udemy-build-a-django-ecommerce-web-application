@@ -4,12 +4,12 @@ from billing.models import BillingProfile
 
 ADDRESS_TYPES = (
     ('billing','Billing'),
-    ('shipping', 'Billing')
+    ('shipping', 'Shipping')
 )
 
 class Address(models.Model):
-    billing_profil = models.ForeignKey(BillingProfile)
-    address_type = models.CharField(max_length=120)
+    billing_profile = models.ForeignKey(BillingProfile, null=True)
+    address_type = models.CharField(max_length=120, choices=ADDRESS_TYPES)
     address_line_1 = models.CharField(max_length=120)
     address_line_2 = models.CharField(max_length=120, null=True, blank=True)
     city = models.CharField(max_length=120)

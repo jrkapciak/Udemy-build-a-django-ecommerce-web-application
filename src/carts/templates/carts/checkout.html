@@ -5,37 +5,66 @@
 {{ object.order_id }} -- {{ object.cart }}
 
 
-{% if not billing_profile %}
+{% if not billing_profil %}
 <div class='row text-center'>
-<div class='col-12 col-md-6'>
-    <p class='lead'>Login</p>
-    {% include 'accounts/snippets/form.html' with form=login_form next_url=request.build_absolute_uri %}
-</div>
-<div class='col-12 col-md-6'> 
-    Continue as Guest
+    <div class='col-12 col-md-6'>
+        <p class='lead'>Login</p>
+        {% include 'accounts/snippets/form.html' with form=login_form next_url=request.build_absolute_uri %}
+    </div>
+    <div class='col-12 col-md-6'>
+        Continue as Guest
 
-    {% url "guest_register" as guest_register_url %}
-    {% include 'accounts/snippets/form.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_register_url %}
-</div>
+        {% url "guest_register" as guest_register_url %}
+        {% include 'accounts/snippets/form.html' with form=guest_form next_url=request.build_absolute_uri action_url=guest_register_url %}
+    </div>
 
 </div>
 
 {% else %}
-    {% if not object.shipping_address %}
-     {% url "guest_register" as guest_register_url %}
-    {% include 'addresses/form.html' with form=address_form next_url=request.build_absolute_uri action_url=guest_register_url %}
+{% if not object.shipping_address %}
+<div class="row">
+    <div class="col-md--6 mx-auto-col-10">
+        <p class="lead">Shipping Address</p>
+        <hr>
+        {% url "checkout_address_create_view" as checkout_address_create %}
+        {% include 'addresses/form.html' with form=address_form address_type='shipping' next_url=request.build_absolute_uri action_url=checkout_address_create %}
 
-
-
-    <h1>Checkout</h1>
-
-    <p>Cart Total: {{ object.cart.total }}</p>
-    <p>Shipping Total: {{ object.shipping_total }}</p>
-    <p>Order Total: {{ object.total }}</p>
+    </div>
+    {% if address_qs.exists %}
+    <div class="col-6">
+        {% for address in address_qs %}
+        {{ address.id }}
+        {{ address.address_line_1}}
+        {% endfor %}
+    </div>
     {% endif %}
+</div>
 
+{% elif not object.billing_address %}
+<div class="row">
+    <div class="col-md--6 mx-auto-col-10">
+        <p class="lead">Billing Address</p>
+        <hr>
+        {% url "checkout_address_create_view" as checkout_address_create %}
+        {% include 'addresses/form.html' with form=address_form address_type='billing' next_url=request.build_absolute_uri action_url=checkout_address_create %}
+
+    </div>
+</div>
+
+
+{% else %}
+<h1>Finalize Checkout</h1>
+<p>Cart Total: {{ object.cart.total }}</p>
+<p>Shipping Total: {{ object.shipping_total }}</p>
+<p>Order Total: {{ object.total }}</p>
+<form class="form" method="POST" action="">
+    {% csrf_token %}
+
+    <button class="btn-success" type="submit">Checkout</button>
+</form>
 {% endif %}
 
+{% endif %}
 
 
 {% endblock %}
